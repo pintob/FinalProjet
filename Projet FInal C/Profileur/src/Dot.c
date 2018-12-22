@@ -27,16 +27,16 @@ void ecrit_arbre_dot(const Arbre a, FILE *out){
 	
 	assert(a != NULL);
 	assert(out != NULL);
-	fprintf(out,"n%p [label=\"<gauche> | <valeur> %s | <temps> %lf - %lf | <droit>\"];\n",a , a->info.nom, a->info.temps_total, a->info.temps_seul);
+	fprintf(out,"n%p [label=\" <valeur> %s | <center> | <temps> %lf - %lf\"];\n",a , a->info.nom, a->info.temps_total, a->info.temps_seul);
 
 
 	if( NULL != a->fg){
 		ecrit_arbre_dot(a->fg, out);
-		fprintf(out, "n%p:gauche:c -> n%p:valeur;\n",a ,a->fg );
+		fprintf(out, "n%p:center:c -> n%p:valeur;\n",a ,a->fg );
 	}
 	if( NULL != a->frd){
 		ecrit_arbre_dot(a->frd,out);
-		fprintf(out, "n%p:droit:c -> n%p:valeur;\n",a ,a->frd );
+		fprintf(out, "n%p:center:c -> n%p:valeur;\n",a->pere ,a->frd );
 	}
 	
 }
