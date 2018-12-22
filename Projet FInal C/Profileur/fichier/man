@@ -1,0 +1,20 @@
+.\" Manpage for myprofiler.
+.TH man 3 "22 Dec 2018" "1.0" "myprofiler man page"
+.SH NAME
+myprofiler \- Profileur C
+.SH SYNOPSIS
+myprofileur fichier [-d][-h]
+.SH DESCRIPTION
+myprofileur est un utilitaire C qui a pour objectif 
+d'offir un profileur graphique pour le langage C
+.SH OPTIONS
+.IP -d
+genere un fichier .dot
+.IP -h
+affiche cette aide et arrête le programme
+.SH BUGS
+Comportement indéfinie si l'utilisateur appel la fonction profile(char *nom, int i), 
+possèdent des identifiants de fonction de plus de 256 charactère ou appel PROFILE
+autre part qu'en début de fonction.
+.SH AUTHOR
+ PINTO Bruno et MAZOU Sarah
