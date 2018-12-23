@@ -1,4 +1,12 @@
-
+/**
+ * \file Analyseur.c
+ * \brief Génére une liste chaînée à partir d'un arbre
+ * \author PINTO Bruno
+ *
+ * Génére une liste chaînée à partir d'un arbre et traiter son contenu
+ *
+ */
+ 
 /*		### BIBLIOTHEQUE ###		*/
 #include "../include/Analyseur.h"
 #include "../include/Erreur.h"

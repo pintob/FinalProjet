@@ -1,4 +1,11 @@
-
+/**
+ * \file Parseur.c
+ * \brief Permet de parser des fichier.log
+ * \author PINTO Bruno
+ *
+ * Permet de parser des fichier.log
+ *
+ */
 /*		### BIBLIOTHEQUE ###		*/
 #include "../include/Parseur.h"
 #include "../include/Erreur.h"

@@ -1,3 +1,11 @@
+/**
+ * \file Erreur.h
+ * \brief Macro Permettant d'affichier des erreurs
+ * \author PINTO Bruno
+ *
+ *
+ */
+
 #ifndef __ERREUR__
 #define __ERREUR__
 

@@ -1,4 +1,12 @@
-
+/**
+ * \file ComparListe.c
+ * \brief Fourni des Fonctions de comparaison entre Liste
+ * \author PINTO Bruno
+ *
+ * Fourni des Fonctions de comparaison entre Liste
+ *
+ */
+ 
 /*		### BIBLIOTHEQUE ###		*/
 #include "../include/ComparListe.h"
 /*		### DECLARATION FONCTION PRIVEE###	*/

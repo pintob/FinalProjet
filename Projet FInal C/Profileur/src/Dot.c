@@ -1,4 +1,12 @@
-
+/**
+ * \file Dot.c
+ * \brief Permet de généré des fichier dot
+ * \author PINTO Bruno
+ *
+ * Crée des fichiers dot à partir d'Arbres
+ *
+ */
+ 
 /*		### BIBLIOTHEQUE ###		*/
 #include "../include/Dot.h"
 /*		### DECLARATION FONCTION PRIVEE###	*/

@@ -1,4 +1,13 @@
-
+/**
+ * \file Arbre.c
+ * \brief Génére et effectue des opération sur un arbre 
+ * \author PINTO Bruno
+ *
+ * Permet de crée un arbre à partir d'un fichier à parser.
+ * Permet aussi d'en lire le contenu
+ *
+ */
+ 
 /*		### BIBLIOTHEQUE ###		*/
 #include "../include/Arbre.h"
 #include "../include/Dot.h"
