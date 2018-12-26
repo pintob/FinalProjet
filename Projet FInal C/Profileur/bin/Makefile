@@ -5,9 +5,13 @@ OBJ = Analyseur.o Arbre.o ComparListe.o Data.o Dot.o main.o Parseur.o
 
 all:
 	make myprofiler
+	make doc
 
 myprofiler: $(OBJ)
 	gcc -o myprofiler $(OBJ) $(CFLAGS) $(CFLAGSMLV) $(LDLIBS)
+
+doc:
+	[ -d "../html" ] || doxygen Doxyfile
 
 Analyseur.o: ../src/Analyseur.c ../include/Analyseur.h ../include/Data.h ../include/Arbre.h 
 	gcc -c $< $(CFLAGS)
@@ -34,4 +38,6 @@ clean:
 	rm -f *.o 
 	
 mrproper: clean
+	rm -rf ../html
 	rm -f myprofiler 
+	
