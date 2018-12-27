@@ -41,7 +41,8 @@ int parseur(FILE* in, Data* data);
 /**
  * \fn int parseur(FILE* in, Data* data)
  * \brief  Prend en paramètre un fichier au format profileur fornit par la documentation.
- * \param in fichier d'entrer, data fichier de sorti
+ * \param in est le fichier au format .log ouvert en lecture
+ * \param data à la fin de la fonction, si possible data contient les informations d'une ligne du fichier
  * \return EOF si le fichier a été entièrement lu
  *		   InvalidLine en cas d'erreur de Parsing
  *         NoParseError si tout c'est bien passé.

@@ -35,7 +35,7 @@ void affiche_data(const Data* data);
 /**
  * \fn void affiche_data(const Data* data)
  * \brief affiche data sur la sortie standard
- * \param data: donnée à afficher
+ * \param data donnée à afficher
  * \return void
  */
 

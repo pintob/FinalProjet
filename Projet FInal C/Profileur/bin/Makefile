@@ -4,8 +4,9 @@ LDLIBS = `pkg-config --libs MLV`
 OBJ = Analyseur.o Arbre.o ComparListe.o Data.o Dot.o main.o Parseur.o 
 
 all:
-	make myprofiler
 	make doc
+	make myprofiler
+	
 
 myprofiler: $(OBJ)
 	gcc -o myprofiler $(OBJ) $(CFLAGS) $(CFLAGSMLV) $(LDLIBS)

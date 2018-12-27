@@ -38,28 +38,54 @@ typedef struct _cel{
 
 /*		### DECLARATION FONCTION ###	*/
 
-void cree_stat(const Arbre in, FILE* out, int compar(const Liste lst1, const Liste lst2), Liste* lst);
+void cree_stat(const Arbre in, Liste* lst);
 /**
- * \fn void cree_stat(const Arbre in, FILE* out, int compar(const Liste lst1, const Liste lst2), Liste* lst);
- * \brief Ecrit dans un fichier et/ou Liste les informations relative à un arbre
+ * \fn void cree_stat(const Arbre in, Liste* lst)
+ * \brief Ecrit dans une liste les informations relative à un arbre
  * \param in est un Arbre
- * out est le fichier sur lequelle sera écrit les informations
- * compar est une fonction de comparation entre deux Liste
- * lst est une liste chaîné par adresse
+ * \param lst est une liste
  * \return void
  * 
- * Ecrit sur le fichier out au format .log les informations
- * contenu dans in .
  * Replis aussi le contenu de lst avec le contenu de l'arbre a
- * Si out ou lst est NULL alors le paramètre est ignoré.
- * La Liste lst est trié par en respectant la fonction compar, si compar est 
- * égal à null la liste sera trié par ordre lexicographique.
  */
+ 
+void liberer_liste(Liste* lst);
+/**
+ * \fn void liberer_liste(Liste* lst)
+ * \brief libère tous les éléments d'une lsite
+ * \param lst liste à libérer
+ * \return void
+ */
+
+int affiche_liste(const Liste lst, double temps_total);
+/**
+ * \fn int affiche_liste(const Liste lst, double temps_total)
+ * \brief affiche le contenu d'une liste sur la sorti standard
+ * \param lst liste contenant les informations
+ * \param temps_total le temps total de la liste (normalement contenu dans l'arbre)
+ * \return le nombre d'élément afficher
+ */ 
+
+int faffiche_liste(FILE* out, const Liste lst, double temps_total);
+/**
+ * \fn int faffiche_liste(FILE* out, const Liste lst, double temps_total)
+ * \brief ecrit le contenu d'une liste sur un fichier
+ * \param lst liste contenant les informations
+ * \param temps_total est le temps total de la liste (normalement contenu dans l'arbre)
+ * \param out est le ficher de sortiouvert en écriture
+ * \return le nombre d'élément écrit
+ */ 
+
+void tri_fusion(Liste *lst, int compar(Liste, Liste));
+/**
+ * \fn void tri_fusion(Liste *lst, int compar(Liste, Liste))
+ * \brief tri une liste chaîné par adresse
+ * \param lst la liste à trié
+ * \param compar la fonction de comparaison entre deux elem, ComparListe en fourni déjà plusieurs
+ * \return void
+ */ 
+
 /*
- * TODO
- * void cree_stat(const Arbre in, Liste* lst);
- * int affiche_liste(const Liste lst);
- * int faffiche_liste(FILE* out, const Liste lst);
  * void tri_liste(Liste* lst, int compar(const Liste lst1, const Liste lst2));
  * 
  */ 

@@ -2,6 +2,9 @@
  * \file main.c
  * \author PINTO BrunoZ
  */
+
+#define NDEBUG
+ 
 #include <stdio.h>
 #include <getopt.h>
  
@@ -11,6 +14,7 @@
 #include "../include/Analyseur.h"
 #include "../include/Data.h"
 #include "../include/Erreur.h"
+
 
 /**
  * \fn int main (int argc, char **argv)
@@ -23,8 +27,9 @@
 int main(int argc, char **argv){
 	FILE* in , *out;
 	Arbre a;
-	int dot, opt, i;
+	int dot, opt;
 	char *fichier;
+	Liste lst = NULL;
 	dot = 0;
 	
 	if(argc < 2){
@@ -77,9 +82,11 @@ int main(int argc, char **argv){
 		system(" evince visualise.pdf &");
 	#endif /*NDEBUG*/
 	
-	cree_stat(a, stdout, NULL, NULL),
+	cree_stat(a, &lst);
+	affiche_liste(lst, a->info.temps_total);
 	fclose(in);
 	libere_arbre(a);
+	liberer_liste(&lst);
 	return 0;
 }
 

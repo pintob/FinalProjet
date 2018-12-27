@@ -16,11 +16,8 @@
 /*		### DECLARATION FONCTION PRIVEE###	*/
 static int ajoute_liste(Liste* lst, char* mot, double temps);
 static Cellule* alloue_cellule(char* nom, double temps);
-static void liberer_liste(Liste* lst);
 static void liberer_liste_aux(Liste lst);
-static void tri_fusion(Liste *lst, int compar(Liste, Liste));
 static void insertion_generique(void* data, const Data* donne);
-static void affiche_liste(const Liste lst, double temps_total, FILE* out);
 static int taille_liste(const Liste lst);
 /*		### DEFINITION FONCTION ###		*/
 
@@ -129,10 +126,13 @@ void liberer_liste_aux(Liste lst){
 	}
 
 }
+int affiche_liste(const Liste lst, double temps_total){
+	return faffiche_liste(stdout, lst, temps_total);
+}
 
-void affiche_liste(const Liste lst, double temps_total, FILE* out){
+int faffiche_liste(FILE* out, const Liste lst, double temps_total){
 	Liste copie;
-	
+	int cmp = 0;
 	assert(lst != NULL);
 	assert(out != NULL);
 	
@@ -140,13 +140,14 @@ void affiche_liste(const Liste lst, double temps_total, FILE* out){
 	printf("  %%         self           \n");
 	printf("time      mseconds   calls     ms/calls    name\n");
 	for(copie = lst; copie != NULL; copie = copie->suivant){
-		printf("%7.4lf     %6.2lf %7d    %8.4lf     %s\n", 
+		cmp += printf("%7.4lf     %6.2lf %7d    %8.4lf     %s\n", 
 			copie->temps_total / temps_total * 100,
 			copie->temps_total * 1000,
 			copie->occ,
 			copie->temps_total * 1000 / copie->occ, 
 			copie->nom);
 	}
+	return cmp;
 }
 
 void insertion_generique(void* data, const Data* donne){
@@ -157,23 +158,13 @@ void insertion_generique(void* data, const Data* donne){
 	ajoute_liste(data, donne->nom, donne->temps_seul);
 }
 
-void cree_stat(const Arbre in, FILE* out, int compar(const Liste lst1, const Liste lst2), Liste* lst){
-	Liste _lst = NULL;
+void cree_stat(const Arbre in, Liste* lst){
 	
 	assert(in != NULL);
+	assert(lst != NULL);
 	
-	ecriture_generique(in, &_lst, insertion_generique);
-	if(compar != NULL){
-		tri_fusion(lst, compar);
-	}
-	
-	if(out != NULL)
-		affiche_liste(_lst, in->info.temps_total, out);
-	
-	if(lst != NULL)
-		*lst = _lst;
-	else
-		liberer_liste(&_lst);
+	ecriture_generique(in, lst, insertion_generique);
+
 }
 
 void fusion(Liste *un, Liste *deux, int compar(Liste, Liste)){ 
