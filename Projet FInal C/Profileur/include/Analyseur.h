@@ -55,6 +55,13 @@ void cree_stat(const Arbre in, FILE* out, int compar(const Liste lst1, const Lis
  * La Liste lst est trié par en respectant la fonction compar, si compar est 
  * égal à null la liste sera trié par ordre lexicographique.
  */
-
+/*
+ * TODO
+ * void cree_stat(const Arbre in, Liste* lst);
+ * int affiche_liste(const Liste lst);
+ * int faffiche_liste(FILE* out, const Liste lst);
+ * void tri_liste(Liste* lst, int compar(const Liste lst1, const Liste lst2));
+ * 
+ */ 
 
 #endif

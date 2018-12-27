@@ -1,9 +1,6 @@
 /**
  * \file main.c
- * \author PINTO Bruno
- *
- * 
- *
+ * \author PINTO BrunoZ
  */
 #include <stdio.h>
 #include <getopt.h>
@@ -16,7 +13,7 @@
 #include "../include/Erreur.h"
 
 /**
- * \fn int main (void)
+ * \fn int main (int argc, char **argv)
  * \brief Entrée du programme.
  *
  * \return 0 - Arrêt normal du programme.
@@ -26,7 +23,7 @@
 int main(int argc, char **argv){
 	FILE* in , *out;
 	Arbre a;
-	int dot, opt;
+	int dot, opt, i;
 	char *fichier;
 	dot = 0;
 	

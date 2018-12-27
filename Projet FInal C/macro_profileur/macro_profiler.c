@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <time.h>
 
-#define MILLIARD 1000000000.
-
 void ecrit_log(const char* nom, int i){
 	static int ouverture = 0;
 	static FILE* out = NULL;
@@ -12,9 +10,10 @@ void ecrit_log(const char* nom, int i){
 	ouverture += i;
 	
 	if(out == NULL){
-		out = fopen("profile.log", "w+");
+		remove("profile.log"); /* plus rapide de supprimer que d'écraser */
+		out = fopen("profile.log", "w");
 	}
-	fprintf(out, "%s -- time : %fs\n", nom, start.tv_sec + (start.tv_nsec / MILLIARD));
+	fprintf(out, "%s -- time : %ld.%lds\n", nom, start.tv_sec,start.tv_nsec / 1000);
 	
 	if(!ouverture){
 		fclose(out);
@@ -22,3 +21,4 @@ void ecrit_log(const char* nom, int i){
 	
 	
 }
+

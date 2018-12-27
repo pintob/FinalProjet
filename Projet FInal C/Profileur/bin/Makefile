@@ -10,8 +10,8 @@ all:
 myprofiler: $(OBJ)
 	gcc -o myprofiler $(OBJ) $(CFLAGS) $(CFLAGSMLV) $(LDLIBS)
 
-doc:
-	[ -d "../html" ] || doxygen Doxyfile
+doc: Doxyfile
+	doxygen Doxyfile
 
 Analyseur.o: ../src/Analyseur.c ../include/Analyseur.h ../include/Data.h ../include/Arbre.h 
 	gcc -c $< $(CFLAGS)

@@ -11,7 +11,7 @@ profile.log obtenu en utilisant macro_profileur.h et libprofileur.a
 sur un code source.
 .SH OPTIONS
 .IP -d
-genere un fichier visualise.dot contenant l'arbre généré
+genere un fichier visualise.dot contenant l'arbre des appels de fonctions contenu dans le fichier .log
 .IP -h
 affiche cette aide et arrête le programme
 .SH BUGS
