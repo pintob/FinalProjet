@@ -3,7 +3,6 @@
  * \author PINTO BrunoZ
  */
 
-#define NDEBUG
  
 #include <stdio.h>
 #include <getopt.h>
@@ -15,7 +14,7 @@
 #include "../include/Data.h"
 #include "../include/Erreur.h"
 
-
+#define NDEBUG
 /**
  * \fn int main (int argc, char **argv)
  * \brief Entrée du programme.
@@ -26,7 +25,7 @@
 
 int main(int argc, char **argv){
 	FILE* in , *out;
-	Arbre a;
+	Arbre a = NULL;
 	int dot, opt;
 	char *fichier;
 	Liste lst = NULL;

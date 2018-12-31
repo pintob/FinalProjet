@@ -26,8 +26,10 @@ int parseur(FILE* in, Data* data){
 	
 	assert(in != NULL);
 	assert(data != NULL);
-	if(getline(&ligne, &t, in) == EOF)
+	if(getline(&ligne, &t, in) == EOF){
+		free(ligne);
 		return EOF;
+	}
 		
 	if(sscanf(ligne, "%[a-zA-Z_][a-zA-Z_0-9]", nom_fonction) == 0){
 		return InvalidLine;

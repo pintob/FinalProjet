@@ -27,7 +27,7 @@ int fibo(int n){
 int main(int argc, char **argv){
 	PROFILE
 	
-	fibo(4);
+	printf("%d\n", fibo(3));
 	return 0;
 }
 

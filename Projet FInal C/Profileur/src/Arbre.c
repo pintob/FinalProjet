@@ -12,8 +12,8 @@
 #include "../include/Arbre.h"
 #include "../include/Dot.h"
 /*		### DECLARATION FONCTION PRIVEE###	*/
-Noeud* alloue_noeud(const Data* d, Id id, Noeud* pere);
-double cree_arbre_aux(Arbre* a, FILE* in, Noeud* pere, Id* id, int *err);
+static Noeud* alloue_noeud(const Data* d, Id id, Noeud* pere);
+static double cree_arbre_aux(Arbre* a, FILE* in, Noeud* pere, Id* id, int *err);
 /*		### DEFINITION FONCTION ###		*/
 
 
@@ -23,6 +23,7 @@ void libere_arbre(Arbre a){
 	}
 	libere_arbre(a->fg);
 	libere_arbre(a->frd);
+	free(a->info.nom);
 	free(a);
 }
 
@@ -41,12 +42,7 @@ Noeud* alloue_noeud(const Data* d, Id id, Noeud* pere){
 	tmp->pere = pere; 
 	tmp->info.temps_total = d->temps_total;
 	tmp->info.temps_seul = d->temps_total;
-	tmp->info.nom = malloc(strlen(d->nom) + 1);
-	if(NULL == tmp->info.nom){
-		free(tmp);
-		return NULL;
-	}
-	strcpy(tmp->info.nom, d->nom);
+	tmp->info.nom = d->nom;
 	return tmp;
 	
 }
@@ -68,8 +64,10 @@ double cree_arbre_aux(Arbre* a, FILE* in, Noeud* pere, Id* id, int* err){
 			*err = ParsingError;
 			return 0;
 		}
-		case(EOF):
+		case(EOF):{
+			
 			return 0;
+		}
 	}
 	
 
@@ -78,7 +76,6 @@ double cree_arbre_aux(Arbre* a, FILE* in, Noeud* pere, Id* id, int* err){
 		free(d.nom);
 		return 0;
 	}
-	
 	*id = *id + 1;
 	
 	*a = alloue_noeud(&d, *id, pere);
@@ -102,8 +99,6 @@ double cree_arbre_aux(Arbre* a, FILE* in, Noeud* pere, Id* id, int* err){
 		free(d.nom);
 		return 0;
 	}
-	
-	free(d.nom);
 	return (*a)->info.temps_total + temps_enfant;
 }
 
