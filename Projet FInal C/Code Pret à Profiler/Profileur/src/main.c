@@ -14,6 +14,7 @@
 #include "../include/Data.h"
 #include "../include/Erreur.h"
 #include "../include/API.h"
+#include "../lib/macro_profiler.h"
 
 #define NDEBUG
 
@@ -26,6 +27,7 @@
  */
 
 int main(int argc, char **argv){
+	PROFILE
 	FILE* in , *out;
 	Arbre a = NULL;
 	int dot, opt, api;

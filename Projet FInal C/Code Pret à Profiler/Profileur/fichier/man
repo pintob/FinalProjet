@@ -3,7 +3,7 @@
 .SH NAME
 myprofiler \- Profileur C
 .SH SYNOPSIS
-myprofileur fichier [-d][-h][-g]
+myprofileur fichier [-d][-h]
 .SH DESCRIPTION
 "myprofileur" est un utilitaire C qui a pour objectif 
 d'offir un profileur graphique pour le langage C en prenant un fichier
@@ -14,8 +14,6 @@ sur un code source.
 genere un fichier visualise.dot contenant l'arbre des appels de fonctions contenu dans le fichier .log
 .IP -h
 affiche cette aide et arrête le programme
-.IP -g
-ouvre une api graphique
 .SH BUGS
 Comportement indéfinie si l'utilisateur appel la fonction profile(char *nom, int i), 
 possèdent des identifiants de fonction de plus de TAILLE_MAX_IDENT charactère ou appel PROFILE

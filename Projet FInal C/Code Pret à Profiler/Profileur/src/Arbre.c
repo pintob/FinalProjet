@@ -11,6 +11,8 @@
 /*		### BIBLIOTHEQUE ###		*/
 #include "../include/Arbre.h"
 #include "../include/Dot.h"
+#include "../lib/macro_profiler.h"
+
 /*		### DECLARATION FONCTION PRIVEE###	*/
 static Noeud* alloue_noeud(const Data* d, unsigned char id[3], Noeud* pere);
 static double cree_arbre_aux(Arbre* a, FILE* in, Noeud* pere, unsigned char id[3], int *err);
@@ -20,6 +22,7 @@ static int compar_id(unsigned char id[3], unsigned char id2[3]);
 
 
 void libere_arbre(Arbre a){
+	PROFILE
 	if(NULL == a){
 		return;
 	}
@@ -27,9 +30,11 @@ void libere_arbre(Arbre a){
 	libere_arbre(a->frd);
 	free(a->info.nom);
 	free(a);
+	return;
 }
 
 Noeud* alloue_noeud(const Data* d, unsigned char id[3], Noeud* pere){
+	PROFILE
 	Noeud *tmp;
 	
 	assert(d != NULL);
@@ -52,6 +57,7 @@ Noeud* alloue_noeud(const Data* d, unsigned char id[3], Noeud* pere){
 }
 
 int cree_arbre(Arbre* a, FILE* in){
+	PROFILE
 	unsigned char id[3] = {};
 	int err = NoTreeError;
 	cree_arbre_aux(a, in, NULL, id, &err);
@@ -59,6 +65,7 @@ int cree_arbre(Arbre* a, FILE* in){
 }
 
 double cree_arbre_aux(Arbre* a, FILE* in, Noeud* pere, unsigned char id[3], int* err){
+	PROFILE
 	Data d;
 	static double temps = 0;
 	double temps_enfant;
@@ -107,38 +114,52 @@ double cree_arbre_aux(Arbre* a, FILE* in, Noeud* pere, unsigned char id[3], int*
 }
 
 void ecriture_generique(const Arbre a, void* out, void(fct_ecriture)(void* out, const Data* donne)){
+	PROFILE
 	
-	if(a == NULL)
+	if(a == NULL){
 		return;
+	}
 	
 	fct_ecriture(out, &a->info);
 	
 	ecriture_generique(a->fg, out, fct_ecriture);
 	ecriture_generique(a->frd, out, fct_ecriture);
 	
+	return;
 }
 
 void ecriture_generique_frere(const Noeud* noeud, void* out, void(fct_ecriture)(void* out, const Data* donne)){
+	PROFILE
 	Noeud* copie;
 	
 	for(copie = (Noeud*)noeud; copie != NULL; copie = copie->frd){
 		fct_ecriture(out, &(copie->info));
 	}
+	return;
 }
 
 Noeud* cherche_noeud(const Arbre a, unsigned char id[3]){
+	PROFILE
+	Noeud* res;
+	
 	if(NULL == a)
 		return NULL;
 	if(compar_id(id, a->id) == 0)
 		return a;
-	if(a->frd == NULL)
-		return cherche_noeud(a->fg, id);
-	if(compar_id(id, a->frd->id) > 0)
-		return cherche_noeud(a->fg, id); /*on va dans fg et pas frd (voir doc)*/
-	return cherche_noeud(a->frd, id);
+	if(a->frd == NULL){
+		res = cherche_noeud(a->fg, id);
+		return res;
+	}
+	if(compar_id(id, a->frd->id) > 0){
+		res = cherche_noeud(a->fg, id);
+		return res;
+	}
+	res = cherche_noeud(a->frd, id);
+	return res;
 }
 
 int compar_id(unsigned char id[3], unsigned char id2[3]){
+	PROFILE
 	if(id[2] != id2[2]){
 		return id2[2] - id[2];
 	}
@@ -153,10 +174,12 @@ int compar_id(unsigned char id[3], unsigned char id2[3]){
 }
 
 void inc_id(unsigned char id[3]){
+	PROFILE
 	id[0] += 1;
 	if(id[0] == 0){
 		id[1] += 1;
 		if(id[1] == 0)
 			id[2] += 1;
 	}
+	return;
 }

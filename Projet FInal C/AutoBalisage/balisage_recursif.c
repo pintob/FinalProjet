@@ -26,6 +26,7 @@ static int parcours(const char *fpath, const struct stat *sb, int tflag){
 	struct stat statbuf;
 	char* temp;
 	stat(fpath, &statbuf);
+
 	if((S_IFDIR & statbuf.st_mode) != S_IFDIR){ /*if fpath is not a repertory*/
 		size = strlen(fpath);
 		if(size >= 2 && strcmp(&fpath[size-2], ".c") == 0){

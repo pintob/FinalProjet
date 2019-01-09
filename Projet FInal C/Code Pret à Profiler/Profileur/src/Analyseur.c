@@ -10,6 +10,7 @@
 /*		### BIBLIOTHEQUE ###		*/
 #include "../include/Analyseur.h"
 #include "../include/Erreur.h"
+#include "../lib/macro_profiler.h"
 
 
 /*		### DECLARATION FONCTION PRIVEE###	*/
@@ -22,6 +23,7 @@ static int taille_liste(const Liste lst);
 
 
 int ajoute_liste(Liste* lst, char* mot, double temps){
+	PROFILE
 	/** retour 1:echec */
 	Liste courant = *lst,temp = NULL;
 	int i = 0;
@@ -41,8 +43,9 @@ int ajoute_liste(Liste* lst, char* mot, double temps){
 	}
 	if ( i > 0){
 		temp = alloue_cellule(mot, temps);
-		if(temp == NULL)
+		if(temp == NULL){
 			return 1;
+		}
 		else{
 			temp->suivant = courant;
 			*lst = temp;
@@ -62,8 +65,9 @@ int ajoute_liste(Liste* lst, char* mot, double temps){
 		if ( i > 0){
 			temp = alloue_cellule(mot, temps);
 			
-			if(temp == NULL)
+			if(temp == NULL){
 				return 1;
+			}
 			else{
 				temp->suivant = courant->suivant;
 				courant->suivant = temp;
@@ -76,8 +80,9 @@ int ajoute_liste(Liste* lst, char* mot, double temps){
 	
 	temp = alloue_cellule(mot, temps);
 	
-	if(temp == NULL)
+	if(temp == NULL){
 		return 1;
+	}
 	
 	courant->suivant = temp;
 	
@@ -85,6 +90,7 @@ int ajoute_liste(Liste* lst, char* mot, double temps){
 }
 
 Cellule* alloue_cellule(char* nom, double temps) {
+	PROFILE
 	Cellule* tmp;
 	char* mot;
 	
@@ -101,6 +107,7 @@ Cellule* alloue_cellule(char* nom, double temps) {
 }
 
 void liberer_liste(Liste* lst){
+	PROFILE
 	if(*lst == NULL)
 		return;
 	liberer_liste_aux(*lst);
@@ -108,9 +115,11 @@ void liberer_liste(Liste* lst){
 	free(*lst);
 	*lst = NULL;
 	
+	return;
 }
 
 void liberer_liste_aux(Liste lst){
+	PROFILE
 	
 	Liste courant, backup;
 	courant = lst;
@@ -124,12 +133,19 @@ void liberer_liste_aux(Liste lst){
         free(courant);
 	}
 
+	return;
 }
+
 int affiche_liste(const Liste lst, double temps_total){
-	return faffiche_liste(stdout, lst, temps_total);
+	PROFILE
+	int res;
+	
+	res = faffiche_liste(stdout, lst, temps_total);
+	return res;
 }
 
 int faffiche_liste(FILE* out, const Liste lst, double temps_total){
+	PROFILE
 	Liste copie;
 	int cmp = 0;
 	assert(lst != NULL);
@@ -150,23 +166,27 @@ int faffiche_liste(FILE* out, const Liste lst, double temps_total){
 }
 
 void insertion_generique(void* data, const Data* donne){
+	PROFILE
 	
 	assert(data != NULL);
 	assert(donne != NULL);
 	
 	ajoute_liste(data, donne->nom, donne->temps_seul);
+	return;
 }
 
 void cree_stat(const Arbre in, Liste* lst){
+	PROFILE
 	
 	assert(in != NULL);
 	assert(lst != NULL);
 	
 	ecriture_generique(in, lst, insertion_generique);
-
+	return;
 }
 
-void fusion(Liste *un, Liste *deux, int compar(Liste, Liste)){ 
+void fusion(Liste *un, Liste *deux, int compar(Liste, Liste)){
+	PROFILE 
 
 	Liste suivant = NULL, courant = NULL, temp = NULL;
 	
@@ -199,9 +219,11 @@ void fusion(Liste *un, Liste *deux, int compar(Liste, Liste)){
 	if(courant->suivant == NULL)
 			courant->suivant = suivant;
 	
+	return;
 }
 
 void tri_fusion(Liste *lst, int compar(Liste, Liste)){
+	PROFILE
 	/**
 	 * Effectue un trie fusion sur un liste simplement chainée
 	 */ 
@@ -224,9 +246,11 @@ void tri_fusion(Liste *lst, int compar(Liste, Liste)){
 	tri_fusion(&deux, compar);
 	
 	fusion(lst, &deux, compar);
+	return;
 }
 
 int taille_liste(const Liste lst){
+	PROFILE
 	int i;
 	Liste tmp = (Liste)lst;
 	for(i = 0; tmp != NULL; i++, tmp=tmp->suivant);

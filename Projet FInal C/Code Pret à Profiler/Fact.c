@@ -4,17 +4,17 @@
 
 
 
-int fibo(int n){
+int fact(int n){
 	PROFILE
 	int res;
 	if (n == 0) {
-		return 0;
+		return 1;
 	} 
 	if (n == 1) {
 		return 1;
 	}
 	
-	res = fibo(n - 1) + fibo(n - 2);
+	res = fact(n - 1) * n;
 	
 	return res;
 	
@@ -23,7 +23,7 @@ int fibo(int n){
 int main(int argc, char **argv){
 	PROFILE
 	
-	printf("%d\n", fibo(20));
+	printf("%d\n", fact(10));
 	return 0;
 }
 

@@ -1,4 +1,4 @@
-CFLAGS = -Wall -Wfatal-errors -O2 -g
+CFLAGS = -Wall -Wfatal-errors -O2 -g -L..//lib -lprofileur
 CFLAGSMLV = `pkg-config --cflags MLV`
 LDLIBS = `pkg-config --libs MLV`
 OBJ = Analyseur.o Arbre.o ComparListe.o Data.o Dot.o main.o Parseur.o API.o
@@ -7,6 +7,7 @@ all:
 	make doc
 	make myprofiler
 	
+
 myprofiler: $(OBJ)
 	gcc -o myprofiler $(OBJ) $(CFLAGS) $(CFLAGSMLV) $(LDLIBS)
 

@@ -40,16 +40,17 @@ void calcul_b(BArray* bab){
 	PROFILE
 	int i, j, sqrti;
 	sqrti = sqrt(sizeof(uint64_t) * 8 * bab->size);
-	if(bab->size == 0)
+	
+	if(bab->size == 0){
 		return;
+	}
 	bab->array[0] = (~(3ull));
 	for(i = 1; i < bab->size; i++){
 		bab->array[i] = (~(0ull));
 	}
 	for(i = 2; i < sqrti; i++){
 		for(j = i * 2; j < sizeof(uint64_t) * 8 * bab->size; j += i){
-			if((bab->array[j/64] & (1ull<< (j%64))))
-				bab->array[j/64] = bab->array[j/64] & (~(1ull << (j%64)));
+			bab->array[j/64] = bab->array[j/64] & (~(1ull << (j%64)));
 		}
 	}
 	return;
@@ -60,7 +61,6 @@ int create_barray(BArray* barray, unsigned int size){
 	barray->array = malloc(sizeof(uint64_t) * size);
 	
 	barray->size = size * (NULL != barray->array);
-	
 	return NULL == barray->array;
 }
 
@@ -75,7 +75,6 @@ int create_intarray(IntArray* barray, unsigned int size){
 	barray->array = malloc(sizeof(int) * size);
 	barray->nb_elem = 0;
 	barray->size = size * (NULL != barray->array);
-	
 	return NULL == barray->array;
 }
 
@@ -159,10 +158,10 @@ int main(int argc, char **argv){
 		fprintf(stderr, "Error not enough mémory\"n");
 		exit(EXIT_FAILURE);
 	}
-
+	display_b(&bab);
 	convert(&bab, &array);
 	free_barray(&bab);
-/*	display_initarray(&array);*/
+	display_initarray(&array);
 	
 	for(i = 1; i < argc; i++){
 		temp = atoi(argv[i]);
@@ -176,4 +175,3 @@ int main(int argc, char **argv){
 	
 	return 0;
 }
-
