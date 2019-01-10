@@ -79,13 +79,9 @@ int main(int argc, char **argv){
 	if(dot){
 		out = fopen("visualise.dot","w");
 		cree_dot(a, out);
+		system("dot -Tpdf visualise.dot -o visualise.pdf"); 
 		fclose(out);
 	}
-	
-	#ifndef NDEBUG
-		system("dot -Tpdf visualise.dot -o visualise.pdf"); 
-		system(" evince visualise.pdf &");
-	#endif /*NDEBUG*/
 	
 	cree_stat(a, &lst);
 	affiche_liste(lst, a->info.temps_total);
